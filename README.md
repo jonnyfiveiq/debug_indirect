@@ -13,7 +13,7 @@ No `event_query.yml` file or database access needed. The script analyses the act
 
 ## Quick start
 
-Auto-discover recent jobs and diagnose them (last 7 days, up to 5 unique job templates):
+Auto-discover and diagnose recent jobs from the last 7 days:
 
 ```bash
 python3.11 ./diagnose_indirect_nodes.py --discover \
@@ -21,12 +21,14 @@ python3.11 ./diagnose_indirect_nodes.py --discover \
   -u admin -p 'password' --no-verify-ssl
 ```
 
+By default `--discover` picks the most recent run of each unique job template (up to 5 templates). This avoids analysing hundreds of identical runs of the same playbook — if "Azure-indirect-test" ran 500 times, you only need to see one since the event structure is the same.
+
 ## Usage
 
-### Look back further or analyse more jobs
+### Look back further or analyse more job templates
 
 ```bash
-python3.11 ./diagnose_indirect_nodes.py --discover --days 7 --limit 10 \
+python3.11 ./diagnose_indirect_nodes.py --discover --days 14 --limit 10 \
   --gateway https://192.168.0.174 \
   -u admin -p 'password' --no-verify-ssl
 ```
