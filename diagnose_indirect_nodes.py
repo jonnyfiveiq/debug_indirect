@@ -19,18 +19,18 @@ Usage:
         --gateway https://192.168.0.174 \
         -u admin -p 'secret' --no-verify-ssl
 
-    # Auto-discover and diagnose recent jobs (last 1 day):
+    # Auto-discover and diagnose recent jobs (last 7 days):
     python3 diagnose_indirect_nodes.py --discover \
         --gateway https://192.168.0.174 \
         -u admin -p 'secret' --no-verify-ssl
 
-    # Discover from last 3 days, limit to 5 jobs:
-    python3 diagnose_indirect_nodes.py --discover --days 3 --limit 5 \
+    # Discover from last 14 days, limit to 10 jobs:
+    python3 diagnose_indirect_nodes.py --discover --days 14 --limit 10 \
         --gateway https://192.168.0.174 \
         -u admin -p 'secret' --no-verify-ssl
 
     # Save full diagnostic output to file:
-    python3 diagnose_indirect_nodes.py --discover --days 1 \
+    python3 diagnose_indirect_nodes.py --discover \
         --gateway https://192.168.0.174 \
         -u admin -p 'secret' --no-verify-ssl \
         --output diagnostic_report.json
@@ -765,7 +765,7 @@ def process_job(session, base, base_url, via_gw, job_id, verbose=False):
     }
 
 
-def discover_jobs(session, base, base_url, via_gw, days=1, limit=5):
+def discover_jobs(session, base, base_url, via_gw, days=7, limit=5):
     """Find recent jobs with relevant module events."""
     ab = api_base(base, via_gw)
     since = (datetime.now(timezone.utc) - timedelta(days=days)).strftime("%Y-%m-%dT%H:%M:%S.000000")
@@ -930,18 +930,18 @@ Examples:
   # Diagnose a specific job:
   %(prog)s 40754 -g https://gw.example.com -u admin -p secret --no-verify-ssl
 
-  # Auto-discover recent jobs (last 1 day, up to 5 unique templates):
+  # Auto-discover recent jobs (last 7 days, up to 5 unique templates):
   %(prog)s --discover -g https://gw.example.com -u admin -p secret --no-verify-ssl
 
   # Discover more:
-  %(prog)s --discover --days 3 --limit 10 -g https://gw.example.com -u admin -p secret --no-verify-ssl
+  %(prog)s --discover --days 14 --limit 10 -g https://gw.example.com -u admin -p secret --no-verify-ssl
         """,
         formatter_class=argparse.RawDescriptionHelpFormatter,
     )
 
     parser.add_argument("job_id", type=int, nargs="?", help="Specific job ID to diagnose.")
     parser.add_argument("--discover", action="store_true", help="Auto-discover recent relevant jobs.")
-    parser.add_argument("--days", type=int, default=1, help="Days to look back (default: 1).")
+    parser.add_argument("--days", type=int, default=7, help="Days to look back (default: 7).")
     parser.add_argument("--limit", type=int, default=5, help="Max unique job templates to analyse (default: 5).")
     parser.add_argument("--verbose", "-v", action="store_true", help="Show raw res keys in output.")
     parser.add_argument("--output", "-o", help="Save full results to JSON file.")
