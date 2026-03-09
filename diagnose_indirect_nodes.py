@@ -16,22 +16,22 @@ to pinpoint mismatches.
 Usage:
     # Diagnose a specific job:
     python3 diagnose_indirect_nodes.py 40754 \
-        --gateway https://192.168.0.174 \
+        --gateway https://gateway.example.com \
         -u admin -p 'secret' --no-verify-ssl
 
     # Auto-discover and diagnose recent jobs (last 7 days):
     python3 diagnose_indirect_nodes.py --discover \
-        --gateway https://192.168.0.174 \
+        --gateway https://gateway.example.com \
         -u admin -p 'secret' --no-verify-ssl
 
     # Discover from last 14 days, limit to 10 jobs:
     python3 diagnose_indirect_nodes.py --discover --days 14 --limit 10 \
-        --gateway https://192.168.0.174 \
+        --gateway https://gateway.example.com \
         -u admin -p 'secret' --no-verify-ssl
 
     # Save full diagnostic output to file:
     python3 diagnose_indirect_nodes.py --discover \
-        --gateway https://192.168.0.174 \
+        --gateway https://gateway.example.com \
         -u admin -p 'secret' --no-verify-ssl \
         --output diagnostic_report.json
 

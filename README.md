@@ -17,7 +17,7 @@ Auto-discover and diagnose recent jobs from the last 7 days:
 
 ```bash
 python3.11 ./diagnose_indirect_nodes.py --discover \
-  --gateway https://192.168.0.174 \
+  --gateway https://gateway.example.com \
   -u admin -p 'password' --no-verify-ssl
 ```
 
@@ -29,7 +29,7 @@ By default `--discover` picks the most recent run of each unique job template (u
 
 ```bash
 python3.11 ./diagnose_indirect_nodes.py --discover --days 14 --limit 10 \
-  --gateway https://192.168.0.174 \
+  --gateway https://gateway.example.com \
   -u admin -p 'password' --no-verify-ssl
 ```
 
@@ -37,7 +37,7 @@ python3.11 ./diagnose_indirect_nodes.py --discover --days 14 --limit 10 \
 
 ```bash
 python3.11 ./diagnose_indirect_nodes.py 40754 \
-  --gateway https://192.168.0.174 \
+  --gateway https://gateway.example.com \
   -u admin -p 'password' --no-verify-ssl
 ```
 
@@ -53,7 +53,7 @@ python3.11 ./diagnose_indirect_nodes.py --discover \
 
 ```bash
 python3.11 ./diagnose_indirect_nodes.py --discover \
-  --gateway https://192.168.0.174 \
+  --gateway https://gateway.example.com \
   -u admin -p 'password' --no-verify-ssl \
   --output diagnostic_report.json
 ```
